@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "memex": {
+      "type": "sse",
+      "url": "https://memex-daemon-squad.orca-decibel.ts.net/sse"
+    }
+  }
+}
