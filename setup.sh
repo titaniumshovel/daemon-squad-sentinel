@@ -48,6 +48,7 @@ read_state() {
 write_state() {
   local mode="$1"
   local node_count="${2:-0}"
+  local installed_by="${AGENT_NAME:-$(whoami)}"
   python3 -c "
 import json, datetime
 data = {}
@@ -61,9 +62,10 @@ data.update({
 })
 if 'install_timestamp' not in data:
     data['install_timestamp'] = datetime.datetime.utcnow().isoformat() + 'Z'
+    data['installed_by'] = '$installed_by'
 json.dump(data, open('$STATE_FILE', 'w'), indent=2)
 "
-  log_only "State written: mode=$mode node_count=$node_count"
+  log_only "State written: mode=$mode node_count=$node_count installed_by=$installed_by"
 }
 
 # ── Capability detection ───────────────────────────────────────────────────
